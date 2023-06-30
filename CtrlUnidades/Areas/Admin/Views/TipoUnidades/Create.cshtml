@@ -1,0 +1,42 @@
+﻿@model CtrlUnidades.Models.TipoUnidad
+
+@{
+    ViewData["Title"] = "Agregar Tipo de Unidad";
+}
+
+<br />
+<br />
+<h3 class="text-center"> Agregar nuevo Tipo de Unidad</h3>
+
+<div class="row">
+    <div class="row px-5 mx-auto border col-10" style="position:center; width:1000px">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="IdTUni" style="font-size:21px">Identificador:</label>
+                <input asp-for="IdTUni" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="IdTUni" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Nombre" style="font-size:21px">Nombre:</label>
+                <input asp-for="Nombre" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Observaciones" style="font-size:21px">Observaciones:</label>
+                <input asp-for="Observaciones" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            &nbsp;
+            @*Volver*@
+            <div class="form-group row">
+                <div class="col-12">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

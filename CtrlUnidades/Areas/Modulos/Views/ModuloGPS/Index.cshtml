@@ -1,0 +1,334 @@
+﻿@model CtrlUnidades.Models.ModuloGPS
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewData["Title"] Seguimiento GPS </title>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <!-- Bootleaf -->
+    @*<link rel="stylesheet" href="~/css/TablaPartial/bootstrap3.3.5.min.css">*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/app.css">
+
+
+    <!-- TablaPartial -->
+    @*<link rel="stylesheet" href="~/css/TablaPartial/bootstrap4.4.1.min.css">*@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    @*ChartPartial*@
+    @*<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>*@
+
+    @*ChartPartial Echart*@
+    <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+
+
+    @*Función para reasignar las coordenadas en el iframe de Google Maps*@
+
+    <script>
+        function concatenate(lat, long) {
+            var val;
+            val = "\"<iframe" + " src='" + "https://www.google.com/maps?q=" + lat.toString() + "," + long.toString() + "+&output=embed" + "'></iframe>\"";
+            return val;
+        }
+        function ReturnURL() {
+            var result;
+            result = concatenate(latitud, longitud);
+            return result;
+        }
+    </script>
+
+    @**********************************************************************@
+
+</head>
+
+<body>
+
+    <partial name="_LoginPartial" />
+
+    @************START NAVBAR**************@
+
+@*@*   <nav class="navbar navbar-dark fixed-top navbar-expand-md py-0" style="background-color: #000">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+        </button> <a class="navbar-brand" asp-area="Cliente" asp-controller="Home" asp-action="Index"> <img src="~/imagenes/circle2.png" width="29" height="29" class="d-inline-c align-text-bottom" /> SIAUMex</a>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active nav-item" id="navbarleftItems">
+                    <a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn" class="nav-link"><i class="fa fa-list white"></i>&nbsp; Mostrar/Ocultar</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://localhost" class="nav-link"> Ayuda</a>
+                </li>
+            </ul>
+
+             <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item" id="navTitle">
+                    <a class="nav-link">&emsp;MONITOR DE UNIDADES</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav ml-auto">
+
+                <li class="nav-item dropdown" id="DDHerramientas">
+                    <a href="#" class="nav-link dropdown-toggle text-white" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-wrench"></i>  Herramientas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropDown">
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="Usuarios" asp-action="Index">
+                            <i class="far fa-user"></i> Usuarios
+                        </a>
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="Ubicaciones" asp-action="Index">
+                            <i class="fas fa-camera-retro"></i> Ubicaciones
+                        </a>
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="Empresa" asp-action="Edit" id="1">
+                            <i class="fas fa-industry"></i> Empresa
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown" id="DDCatalogos">
+                    <a href="#" class="nav-link dropdown-toggle text-white" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-address-book"></i> Catálogos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropDown">
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="LineasTransportistas" asp-action="Index">
+                            <i class="fas fa-book"></i> Línea transportistas
+                        </a>
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="Conductores" asp-action="Index">
+                            <i class="fas fa-id-card"></i> Conductores
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown" id="DDModulos">
+                    <a href="#" class="nav-link dropdown-toggle text-white" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-handshake"></i> Módulos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropDown">
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="Proveedores" asp-action="Index">
+                            <i class="fas fa-book"></i> Solicitudes
+                        </a>
+                        <a class="dropdown-item" asp-area="Modulos" asp-controller="ModuloGPS" asp-action="Index">
+                            <i class="fas fa-boxes"></i> Seguimiento GPS
+                        </a>
+                        <a class="dropdown-item" asp-area="Admin" asp-controller="RepProveedores" asp-action="Index">
+                            <i class="fas fa-file"></i> Control de temperatura
+                        </a>
+                    </div>
+                </li>
+                &emsp;&emsp;
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Login", "Account", new { area = "Identity" })">
+                    <button type="submit" class="nav-link btn btn-link text-white">
+                        <i class="fas fa-sign-out-alt"></i> Salir&emsp;&emsp;
+                    </button>
+                </form>
+
+            </ul>
+        </div>
+    </nav>*@
+
+    @*************END NAVBAR*************@
+
+    @*<partial name="_LoginPartial" /> *@ 
+    @*<br />*@
+@*    <h1 class="text-center">Seguimiento GPS</h1>*@
+ 
+    @*BONTONES E INTERACCIÓN CON EL MAPA*@
+
+@*    <div class="row px-5 mx-auto border col-10" style="position:center; width:400px">
+     <div class="row">
+        Latitud:&ensp;&nbsp&nbsp <input id="latitud" type="text"/>
+        Longitud: <input id="longitud" type="text"/>
+     <button onclick="process()">Enviar</button>
+     </div>
+    </div>*@
+
+    @*************************************@
+                        <style>
+                            .left-buffer {
+                                margin-left:20px;
+                            }
+                    </style>
+
+    <div id="container" style="background-color: #fff">
+        <div id="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="panel panel-default" id="features">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            @*&nbsp;&nbsp; MONITOR DE UNIDADES*@
+                            <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row left-buffer">
+                            <div class="col-xs-8 col-md-8">
+                                <input type="text" class="form-control search" placeholder="Filtrar" />
+                            </div>
+                            <div class="col-xs-4 col-md-4">
+                                <button type="button" class="btn btn-primary pull-right sort" data-sort="feature-name" id="sort-btn"><i class="fa fa-sort"></i>&nbsp;&nbsp;Aplicar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-table"> @**********@
+
+                    <style>
+                            .box {
+                                border-top: 2px solid black;
+                                height: auto;
+                                width: auto;
+                                background-color: #d8d8d8ff;
+                            }
+                    </style>
+
+                        <div class="box">
+
+                            @*<button id="cargarDatos" class="btn btn-primary">Cargar datos</button>*@
+                            @*<hr />*@
+                            <div id="cajaDatos">@*<partial name="/Modulos/ModuloGPS/_TablaPartial.cshtml" />*@</div>
+                            @*<partial name="_ChartPartial" />*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    @*************************************@
+
+    <br />
+    <partial name="_MapPartial" />
+@*    <div class="d-flex justify-content-center main-section"> @*Centra el cuadro*@
+        @*<div class="d-flex justify-content-center main-section" id="map" style="width: 100%; height: 940px"></div>*@
+@*    <script>
+        // Creating map options
+        var mapOptions = {
+            center: [20.4126109, -99.9866907],
+            zoom: 13
+        }
+
+        // Creating a map object
+        var map = new L.map('map', mapOptions);
+
+        // Creating a Layer object
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+        // Adding layer to the map
+        map.addLayer(layer);
+
+        var customIcon = new L.Icon({
+        iconUrl: '/imagenes/Camion.png',
+        iconSize: [40, 40],
+        iconAnchor: [25, 50]
+        });
+
+        var marker, latitud, longitud, firstuse;
+
+        latitud = 20.4126109;
+        longitud = -99.9866907;
+        firstuse = 0;
+
+        //FUNCIÓN PARA ACTUALIZAR MARCADOR Y POPUP
+
+        function process() {
+                  
+          if (firstuse) /*Se comprueba si es el primer establecimiento del marcador*/
+          {
+              map.removeLayer(marker);
+          }
+
+          firstuse = 1;
+
+          latitud = document.getElementById("latitud").value;
+          longitud = document.getElementById("longitud").value;
+
+          var popup = ReturnURL();
+
+            console.log(popup)
+
+          // Creating a marker
+          marker = L.marker([latitud, longitud], { icon: customIcon }).addTo(map);
+            marker.bindPopup(popup); /*"<iframe src='https://www.google.com/maps?q=20.4126109,-99.9866907+&output=embed'></iframe>"*/
+      
+        }
+
+        //******************************************
+
+
+
+        // Creating a marker
+        marker = L.marker([21.4126109, -99.9866907], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<iframe src='https://www.google.com/maps?q=21.4126109,-99.9866907+&output=embed'></iframe>");
+
+        // Creating a marker
+        marker = L.marker([19.4126109, -99.9866907], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<iframe src='https://www.google.com/maps?q=21.4126109,-99.9866907+&output=embed'></iframe>");
+
+        // Creating a marker
+        marker = L.marker([19.4126109, -98.9866907], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<iframe src='https://www.google.com/maps?q=21.4126109,-99.9866907+&output=embed'></iframe>");
+
+        // Creating a marker
+        marker = L.marker([18.4126109, -101.2866907], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<iframe src='https://www.google.com/maps?q=21.4126109,-99.9866907+&output=embed'></iframe>");
+
+        // Creating a marker
+        marker = L.marker([20.692344, -103.266166], { icon: customIcon }).addTo(map);
+            marker.bindPopup("<iframe src='https://www.google.com/maps?q=20.692344,-103.266166+&output=embed'></iframe>");
+
+        // Creating a marker
+        marker = L.marker([22.7126109, -101.4794400], { icon: customIcon }).addTo(map);
+        marker.bindPopup("<iframe src='https://www.google.com/maps?q=22.7126109,-91.4794400+&output=embed'></iframe>");
+
+         
+    @*@*</script>*@*@*@
+    </div>
+
+    <!-- Bootleaf -->
+    <script src="~/js/app.js"></script>
+    <!-- TablaPartial -->
+    @*<script  type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+
+
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                document.getElementById('navTitle').innerHTML
+                    = '<a class="nav-link">&emsp;MONITOR DE UNIDADES</a>';
+                const navbarleftItems = document.getElementById('navbarleftItems');
+                navbarleftItems.style.display = 'initial';
+                $("#cajaDatos").load('/Modulos/ModuloGPS/_TablaPartial');
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

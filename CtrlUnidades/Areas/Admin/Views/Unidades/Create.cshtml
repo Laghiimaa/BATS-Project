@@ -1,0 +1,66 @@
+﻿@model CtrlUnidades.Models.Unidad
+
+@{
+    ViewData["Title"] = "Agregar Unidad";
+}
+
+<br />
+<br />
+<h3 class="text-center"> Agregar nueva unidad</h3>
+
+<div class="row">
+    <div class="row px-5 mx-auto border col-10" style="position:center; width:1000px">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="IdLin" style="font-size:21px">Pertenece a la línea transportista:</label>
+                <div style="font-size:18px" id="PropietarioSelect">
+                    @Html.DropDownListFor(model => model.IdLin, new SelectList(ViewBag.LineaTransportista, "IdLin", "Nombre"),
+                    "Seleccione una línea transportista", new { @class = "form-control" })
+                </div>
+                <span asp-validation-for="IdLin" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Placas" style="font-size:21px">Placas:</label>
+                <input asp-for="Placas" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Placas" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Tipo" style="font-size:21px">Tipo:</label>
+                <div style="font-size:18px" id="PropietarioSelect">
+                    @Html.DropDownListFor(model => model.Tipo, new SelectList(ViewBag.LineaTransportista, "IdLin", "Nombre"),
+                    "Seleccione el tipo de unidad", new { @class = "form-control" })
+                </div>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Capacidad" style="font-size:21px">Capacidad:</label>
+                <input asp-for="Capacidad" class="form-control" type="number" style="font-size:18px" />
+                <span asp-validation-for="Capacidad" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Nombre" style="font-size:21px">Nombre:</label>
+                <input asp-for="Nombre" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Observaciones" style="font-size:21px">Observaciones:</label>
+                <input asp-for="Observaciones" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            &nbsp;
+            @*Volver*@
+            <div class="form-group row">
+                <div class="col-12">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

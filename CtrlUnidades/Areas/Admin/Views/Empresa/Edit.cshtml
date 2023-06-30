@@ -1,0 +1,112 @@
+﻿@model CtrlUnidades.Models.Herramienta
+@{
+    //Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Empresa </title>
+
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" />
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+    <partial name="_LoginPartial" />
+    <br />
+    <br />
+     <h3 class="text-center">Datos de la empresa</h3>
+
+    <div class="row">
+        <div class="row px-5 mx-auto border col-10" style="position:center; width:1000px">
+            <form method="post" asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id_Herr" />
+                &nbsp;
+                <div class="form-group row" hidden>
+                    <label style="font-size:21px">Nombre</label>
+                    <input asp-for="Nombre" class="form-control" style="font-size:18px" id="Datos" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Nombre</label>
+                    <input class="form-control" style="font-size:18px" id="NombreC" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">RFC</label>
+                    <input class="form-control" style="font-size:18px" id="RFC" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Calle</label>
+                    <input class="form-control" style="font-size:18px" id="Calle" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Colonia</label>
+                    <input class="form-control" style="font-size:18px" id="Colonia" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Ciudad</label>
+                    <input class="form-control" style="font-size:18px" id="Ciudad" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Estado</label>
+                    <input class="form-control" style="font-size:18px" id="Estado" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Código postal</label>
+                    <input class="form-control" style="font-size:18px" id="CP" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Correo</label>
+                    <input class="form-control" style="font-size:18px" id="Correo" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Telefono</label>
+                    <input class="form-control" style="font-size:18px" id="Tel" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Ubicación</label>
+                    <input class="form-control" style="font-size:18px" id="Ubi" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                <div class="form-group row">
+                    <label style="font-size:21px">Contacto</label>
+                    <input class="form-control" style="font-size:18px" id="Contacto" onchange="Actualizar(this)" />
+                </div>
+                &nbsp;
+                @*Volver*@
+                <div class="form-group row">
+                    <div class="col-12 ">
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary form-control" style="font-size:20px" asp-route-id="@Model.Id_Herr">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/Empresa.js" asp-append-version="true"></script>
+
+</body>
+</html>

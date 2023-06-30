@@ -1,0 +1,109 @@
+﻿                                @{
+                                    Layout = null;
+                                }                                
+
+                                <style>
+                                   font-face { font-family: Arial !important; font-display: swap !important; }
+                                </style>
+                                @*<link href="@Url.Content("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />*@
+                                <link href="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+                                @*<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>*@ 
+                                @*<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>*@                   
+                                <link href="@Url.Content("~/css/TablaPartial/TablaPartial.css")" rel="stylesheet" type="text/css" />
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+                                @*ChartPartial*@
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                
+
+                                            @*<div class="container mt-5">*@
+                                                @*<div class="d-flex justify-content-center row">*@
+                                                    @*<div class="col-md-10">*@
+                                                        <div class="rounded">
+                                                            <div class="table-responsive table-borderless">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                        <th class="text-center">IdCond</th>
+                                                                        <th>IdLin</th>
+                                                                        <th>Placas</th>
+                                                                        <th>Temperatura</th>
+                                                                        <th>U. Actualización</th>
+                                                                        <th>Dirección</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="table-body">
+                                                                    @{
+                                                                        int i = 1;
+                                                                        string alert;
+                                                                        string alert_text;
+                                                                    @foreach (ModuloGPS d in Model)
+                                                                    {
+                                                                        float TEMP = float.Parse(d.Temperatura);
+                                                                        if(TEMP>=35){ alert = "success"; alert_text = "ACEPTABLE"; }else{ alert = "danger"; alert_text = "ALERTA";}
+                                                                    <tr class="cell-1" data-toggle="collapse" data-target="@($"#demo-{i}")">
+                                                                        <td class="text-center">@d.IdCond</td>
+                                                                        <td>@d.IdLin</td>
+                                                                        <td>@d.Placas</td>
+                                                                        <td><span class="@($"badge text-bg-{alert}")">@($"{alert_text}")</span>&nbsp;&nbsp;@($"{@d.Temperatura} °C")</td> 
+                                                                        <td>@d.Fecha,@d.Hora</td>
+                                                                        <td>@d.Direccion</td>
+                                                                        <td class="table-elipse" data-toggle="collapse" data-target="#demo"><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                                                    </tr>
+                                                                    <tr id="@($"demo-{i}")" class="collapse cell-1 row-child">
+                                                                        @* <td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+                                                                        <td colspan="1">Product&nbsp;</td>
+                                                                        <td colspan="3">iphone SX with ratina display</td>
+                                                                        <td colspan="1">QTY</td>
+                                                                        <td colspan="2">2</td>*@
+                                                                        <td colspan="7"> <div><partial name="_ChartPartial" /></div> </td> 
+                                                                        <script>
+                                                                        document.getElementById('chart').id = '@($"chart-{i}")';
+                                                                        </script>
+                                                                    </tr>
+                                                                    i++;
+                                                                    }
+                                                                      
+                                                                    } 
+@*                                                                     <tr class="cell-1" data-toggle="collapse" data-target="#demo-20">
+                                                                        <td class="text-center">2</td>
+                                                                        <td>#SO-13488</td>
+                                                                        <td>Tinder Steel</td>
+                                                                        <td><span class="badge badge-success">ACEPTABLE</span></td>
+                                                                        <td>$3664.00</td>
+                                                                        <td>Yesterday</td>
+                                                                        <td class="table-elipse" data-toggle="collapse" data-target="#demo"><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                                                    </tr>
+                                                                    <tr id="demo-20" class="collapse cell-1 row-child">
+                                                                        @*<td class="text-center" colspan="1"><i class="fa fa-angle-up"></i></td>
+@*                                                                        <td colspan="1">Product&nbsp;</td>
+                                                                        <td colspan="3">iphone SX with ratina display</td>
+                                                                        <td colspan="1">QTY</td>
+                                                                        <td colspan="2">2</td>
+                                                                        <td colspan="7"> <div><partial name="_ChartPartial" /></div> </td> 
+                                                                    </tr>*@
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                @*</div>*@
+                                            @*</div>*@
+                                        @*</div>*@
+
+                                        @*<script  type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>*@
+
+                                        <script type="text/javascript" src="#"></script>
+                                        <script type="text/javascript" src="#"></script>
+                                        <script type="text/javascript" src="#"></script>
+                                        <script type="text/javascript">#</script>
+
+                                        <script type="text/javascript">
+                                            var myLink = document.querySelectorAll('a[href="#"]');
+                                            myLink.forEach(function(link){
+                                              link.addEventListener('click', function(e) {
+                                                e.preventDefault();
+                                              });
+                                            });
+                                        </script>                                        

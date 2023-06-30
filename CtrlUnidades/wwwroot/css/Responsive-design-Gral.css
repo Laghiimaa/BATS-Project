@@ -1,0 +1,23 @@
+﻿/*Graficas de pagina principal*/
+.GraficasTM {
+    display: grid;
+    gap: 100px;
+    grid-auto-rows: 352px;
+   /* grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));*/
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+}
+
+/*Logotipo*/
+.ImagenLogo {
+    width:10%;
+    height:10%;
+    position:center;
+}
+
+.Fechas {
+    display: grid;
+    gap: 10px;
+    /*grid-auto-rows: 352px;*/
+    grid-auto-rows:10px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+}

@@ -1,0 +1,175 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+/* Estilos personalizados */
+/*body {
+    background: url('../imagenes/Bienvenido2.jpg') no-repeat center center fixed;
+    background-size:cover;
+}*/
+
+.main-section {
+    /* margin: 0 auto;
+    margin-top: 25%;
+    padding: 0;
+       */
+    /*  position: absolute;
+    left: 800px;
+    bottom: 350px;*/
+    /*    style ="position:absolute; left:800px; bottom:350px"
+*/
+    display: flex;
+    /*    grid-template-columns: auto auto auto;
+*/ margin: 0 auto;
+    margin-top: 10%;
+    padding: 0;
+    position: center;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+}
+
+/*@media (max-width: 768px) {
+    .main-section {
+        position: center;
+        left: 800px;
+        bottom: 350px;
+        background-color: red;
+    }
+}*/
+
+.modal-content-IS {
+    background-color: #3b4652;
+    opacity: .95;
+    padding: 0 20px;
+    box-shadow: 0px 0px 3px #848484;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 500px), 1fr));
+}
+
+.user-img {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+
+    .user-img img {
+        width: 170px;
+        height: 170px;
+        box-shadow: 0px 0px 3px #848484;
+        border-radius: 50%;
+    }
+
+.form-group input {
+    height: 42px;
+    font-size: 25px;
+    border: 0;
+    padding-left: 54px;
+    border-radius: 5px;
+}
+
+.form-group::before {
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+    padding-top: 4px;
+}
+
+/*  .form-group#user-group:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f007";
+    }
+
+
+    .form-group#password-group:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f023";
+    }*/
+
+button {
+    width: 100%;
+    margin: 5px 0 25px;
+}
+
+.Usuario-placeholder {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f007";
+}
+
+.Password-placeholder {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f023";
+}

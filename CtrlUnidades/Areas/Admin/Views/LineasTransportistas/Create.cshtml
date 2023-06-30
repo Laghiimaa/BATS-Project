@@ -1,0 +1,72 @@
+﻿@model CtrlUnidades.Models.LineaTransportista
+
+@{
+    ViewData["Title"] = "AGREGAR LÍNEA TRANSPORTISTA";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_LoginPartial" />
+
+
+<div class="container mt-4">
+<br />
+<h2 class="text-center"> Agregar una nueva línea transportista</h2>
+</div>
+<br />
+
+<div class="col-12 text-center">
+    <a asp-action="AddWithExcel" class="btn btn-warning" style="font-size:20px"></i> Agregar mediante archivo de Excel (XLSX) </a>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="row px-5 mx-auto border col-10" style="position:center; width:1000px">
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="IdLin" style="font-size:21px">ID</label>
+                <input asp-for="IdLin" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="IdLin" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Nombre" style="font-size:21px">Nombre</label>
+                <input asp-for="Nombre" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Contacto" style="font-size:21px">Contacto</label>
+                <input asp-for="Contacto" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Contacto" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Telefono" style="font-size:21px">Teléfono</label>
+                <input asp-for="Telefono" class="form-control" style="font-size:18px" type="number"/>
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Correo" style="font-size:21px">Correo</label>
+                <input asp-for="Correo" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            &nbsp;
+            <div class="form-group row">
+                <label asp-for="Ubicacion" style="font-size:21px">Ubicación</label>
+                <input asp-for="Ubicacion" class="form-control" style="font-size:18px" />
+                <span asp-validation-for="Ubicacion" class="text-danger"></span>
+            </div>
+            &nbsp;
+            @*Volver*@
+            <div class="form-group row">
+                <div class="col-12">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

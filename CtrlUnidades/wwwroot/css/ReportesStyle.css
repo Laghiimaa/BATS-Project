@@ -1,0 +1,32 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+/*.FGraficas {
+
+    position: absolute;
+    top: 330px;
+
+}
+
+.BFechas {
+
+    position: absolute;
+    top: 280px;
+    left:678px;
+}*/
+
+.Fechas {
+    /*display: grid;
+    gap: 200px;*/
+    /*    column-gap:195px;
+*/
+    /*grid-auto-rows: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 50px), 1fr));*/
+
+    display: grid;
+
+    column-gap: 200px;
+    row-gap:50px;
+    grid-auto-rows: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 50px), 1fr));
+}
